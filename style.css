@@ -1,0 +1,1638 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+.container {
+    width: 400px;
+    max-width: 95%;
+    margin: 30px auto;
+}
+
+.balance-box {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.income {
+    color: green;
+}
+
+.expense {
+    color: red;
+}
+
+.transaction-form {
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.transaction-form input,
+.transaction-form select,
+.transaction-form button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.transaction-form button {
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.transaction-form button:hover {
+    background: #444;
+}
+
+/* Search & Filter */
+
+#search,
+#filter {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* History */
+
+.history {
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#list {
+    list-style: none;
+}
+
+#list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f8f8;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Edit & Delete Buttons */
+
+#list button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#list button:first-child {
+    background: orange;
+    color: white;
+}
+
+#list button:last-child {
+    background: red;
+    color: white;
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .container {
+        width: 95%;
+        margin: 15px auto;
+    }
+
+}
+.dashboard {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 15px;
+    flex: 1;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.dashboard-card p {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.chart-box {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.chart-box h3 {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 500px) {
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+}
+/* Budget */
+
+.budget-box {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.budget-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.budget-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#budgetMessage {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.progress-container {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background: green;
+    transition: width 0.4s ease;
+}
+/* Dark Mode Button */
+
+#themeBtn {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #222;
+    color: white;
+}
+
+
+/* Dark Mode */
+
+body.dark {
+    background: #121212;
+    color: white;
+}
+
+body.dark .balance-box,
+body.dark .summary,
+body.dark .dashboard-card,
+body.dark .chart-box,
+body.dark .transaction-form,
+body.dark .history,
+body.dark .budget-box {
+    background: #1e1e1e;
+    color: white;
+}
+
+body.dark input,
+body.dark select {
+    background: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+}
+
+body.dark #list li {
+    background: #2a2a2a;
+}
+
+body.dark .progress-container {
+    background: #444;
+}
+/* =========================
+   DAY 10 - TRANSACTION CARD
+========================= */
+
+#list li {
+    border-left: 5px solid transparent;
+    transition: 0.2s ease;
+}
+
+#list li:hover {
+    transform: translateY(-2px);
+}
+
+/* Income */
+
+#list li.income-item {
+    border-left-color: green;
+}
+
+/* Expense */
+
+#list li.expense-item {
+    border-left-color: red;
+}
+
+
+/* Transaction information */
+
+#list li span {
+    line-height: 1.7;
+}
+
+
+/* Buttons */
+
+#list li button {
+    min-width: 40px;
+    height: 35px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    #list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #list li div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+}
+#list li button:first-child {
+    background: orange;
+}
+
+#list li button:last-child {
+    background: red;
+}
+
+#list li button:hover {
+    opacity: 0.8;
+}
+
+body.dark #list li.income-item {
+    border-left-color: #00c853;
+}
+
+body.dark #list li.expense-item {
+    border-left-color: #ff5252;
+}
+/* =========================
+   DAY 11 - MONTHLY REPORT
+========================= */
+
+.report-box {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.report-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.report-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.report-summary div {
+    background: #f5f5f5;
+    padding: 15px;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.report-summary p {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Dark Mode */
+
+body.dark .report-box {
+    background: #1e1e1e;
+}
+
+body.dark .report-summary div {
+    background: #2a2a2a;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .report-summary {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* =========================
+   STEP 12 - AUTH PAGE
+========================= */
+
+.auth-container {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.auth-box {
+
+    width: 380px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.1);
+
+    text-align: center;
+}
+
+
+.auth-box h1 {
+    margin-bottom: 10px;
+}
+
+
+.auth-box h3 {
+    margin-bottom: 20px;
+}
+
+
+.auth-box input {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 5px;
+}
+
+
+.auth-box button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #222;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+.auth-box button:hover {
+    opacity: 0.8;
+}
+
+
+#loginMessage,
+#signupMessage {
+
+    margin-top: 15px;
+
+    font-weight: bold;
+}
+
+
+.auth-box a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Dark Mode */
+
+body.dark .auth-box {
+    background: #1e1e1e;
+    color: white;
+}
+
+
+body.dark .auth-box input {
+    background: #2a2a2a;
+    color: white;
+
+    border-color: #444;
+}
+
+
+body.dark .auth-box button {
+    background: white;
+    color: black;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .auth-box {
+
+        width: 90%;
+
+        padding: 20px;
+    }
+
+}
+#list button{
+    margin-left:5px;
+    padding:5px 10px;
+    cursor:pointer;
+}
+/* Profile Box */
+
+.profile-box{
+    background:white;
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.profile-box h3{
+    margin-bottom:15px;
+}
+
+.profile-box p{
+    margin:8px 0;
+}
+/* =========================================
+   PREMIUM DASHBOARD UI
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f6f8;
+    color: #1f2937;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+/* Main heading */
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Common Cards */
+
+.balance-box,
+.summary,
+.dashboard,
+.transaction-form,
+.profile-box,
+.monthly-report,
+.budget-box,
+.history {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+/* Balance */
+
+.balance-box {
+    text-align: center;
+}
+
+.balance-box h3 {
+    margin-bottom: 5px;
+}
+
+.balance-box h2 {
+    font-size: 34px;
+    margin: 0;
+}
+
+/* Income / Expense */
+
+.summary {
+    display: flex;
+    gap: 15px;
+}
+
+.summary > div {
+    flex: 1;
+    padding: 15px;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.income h4,
+.income p {
+    color: #16a34a;
+}
+
+.expense h4,
+.expense p {
+    color: #dc2626;
+}
+
+/* Dashboard */
+
+.dashboard {
+    display: flex;
+    gap: 15px;
+}
+
+.dashboard-card {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 14px;
+}
+
+.dashboard-card p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Chart */
+
+#expenseChart {
+    max-height: 300px;
+}
+
+/* Forms */
+
+.transaction-form input,
+.transaction-form select,
+.transaction-form button,
+#budgetLimit,
+#reportMonth,
+#search,
+#filter {
+    width: 100%;
+    min-height: 45px;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+}
+
+/* Main buttons */
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#addBtn,
+#saveBudget,
+#exportBtn {
+    background: #1f2937;
+    color: white;
+}
+
+#addBtn:hover,
+#saveBudget:hover,
+#exportBtn:hover {
+    opacity: 0.85;
+}
+
+/* Profile */
+
+.profile-box p {
+    margin: 10px 0;
+}
+
+#editProfileBtn {
+    margin-top: 5px;
+}
+
+/* Change Password */
+
+#changePasswordBtn {
+    margin-bottom: 10px;
+}
+
+/* History */
+
+#list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+#list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border-radius: 14px;
+}
+
+/* Edit / Delete */
+
+#list li button {
+    padding: 8px 10px;
+}
+
+#list li button:first-child {
+    background: #f59e0b;
+    color: white;
+}
+
+#list li button:last-child {
+    background: #ef4444;
+    color: white;
+}
+
+/* Export */
+
+#exportBtn {
+    margin-bottom: 8px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 27px;
+        text-align: center;
+    }
+
+    .summary,
+    .dashboard {
+        gap: 10px;
+    }
+
+    .balance-box,
+    .summary,
+    .dashboard,
+    .transaction-form,
+    .profile-box,
+    .monthly-report,
+    .budget-box,
+    .history {
+        border-radius: 15px;
+    }
+
+    .balance-box h2 {
+        font-size: 30px;
+    }
+
+    #list li {
+        align-items: flex-start;
+    }
+}
+/* Fix Expense Overview Height */
+
+#expenseChart {
+    width: 100% !important;
+    height: 250px !important;
+    max-height: 250px;
+}
+/* =================================
+   PREMIUM TOP BUTTONS
+================================= */
+
+#logoutBtn,
+#changePasswordBtn,
+#themeBtn {
+    border: none;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 3px;
+    transition: 0.2s ease;
+}
+
+/* Logout */
+
+#logoutBtn {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+#logoutBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* Change Password */
+
+#changePasswordBtn {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+#changePasswordBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* Dark Mode */
+
+#themeBtn {
+    background: #1f2937;
+    color: white;
+}
+
+#themeBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* Profile Edit */
+
+#editProfileBtn {
+    background: #f3f4f6;
+    color: #374151;
+    margin-top: 8px;
+}
+
+#editProfileBtn:hover {
+    transform: translateY(-2px);
+}
+/* =================================
+   PREMIUM BALANCE CARD
+================================= */
+
+.balance-box {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        #111827,
+        #374151
+    );
+    color: white;
+    padding: 28px 20px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.balance-box::before {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    top: -60px;
+    right: -30px;
+}
+
+.balance-box::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    bottom: -45px;
+    left: -25px;
+}
+
+.balance-box h3,
+.balance-box h2 {
+    position: relative;
+    z-index: 1;
+}
+
+.balance-box h3 {
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+.balance-box h2 {
+    font-size: 36px;
+    margin-top: 8px;
+}
+/* =================================
+   PREMIUM INCOME / EXPENSE CARDS
+================================= */
+
+.summary {
+    background: #ffffff;
+    padding: 14px;
+    gap: 12px;
+}
+
+.summary > div {
+    padding: 16px;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary .income {
+    background: linear-gradient(
+        135deg,
+        #ecfdf5,
+        #f0fdf4
+    );
+    border-left: 4px solid #16a34a;
+}
+
+.summary .expense {
+    background: linear-gradient(
+        135deg,
+        #fef2f2,
+        #fff1f2
+    );
+    border-left: 4px solid #dc2626;
+}
+
+.summary h4 {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.summary p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+/* =================================
+   EXPENSE OVERVIEW
+================================= */
+
+#expenseChart {
+    width: 100% !important;
+    height: 230px !important;
+    max-height: 230px;
+}
+
+.no-expense-message {
+    margin: 0 !important;
+    padding: 55px 10px !important;
+    font-size: 14px;
+}
+/* =================================
+   MOBILE RESPONSIVE
+================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    /* Top buttons */
+
+    #logoutBtn,
+    #changePasswordBtn,
+    #themeBtn {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    /* Balance */
+
+    .balance-box {
+        padding: 24px 15px;
+    }
+
+    .balance-box h2 {
+        font-size: 30px;
+    }
+
+    /* Income / Expense */
+
+    .summary {
+        display: flex;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .summary > div {
+        min-width: 0;
+        padding: 13px 8px;
+    }
+
+    .summary h4 {
+        font-size: 13px;
+    }
+
+    .summary p {
+        font-size: 17px;
+    }
+
+    /* Dashboard */
+
+    .dashboard {
+        display: flex;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .dashboard-card {
+        min-width: 0;
+        padding: 12px 6px;
+    }
+
+    .dashboard-card h4 {
+        font-size: 12px;
+    }
+
+    .dashboard-card p {
+        font-size: 18px;
+        word-break: break-word;
+    }
+
+    /* Forms */
+
+    .transaction-form input,
+    .transaction-form select,
+    .transaction-form button,
+    #budgetLimit,
+    #reportMonth,
+    #search,
+    #filter {
+        width: 100%;
+        min-height: 45px;
+        font-size: 16px;
+    }
+
+    /* History */
+
+    #list li {
+        width: 100%;
+        gap: 8px;
+        padding: 12px 8px;
+    }
+
+    #list li span {
+        max-width: 65%;
+        word-break: break-word;
+    }
+
+    #list li button {
+        padding: 7px 9px;
+    }
+
+    /* Profile */
+
+    .profile-box {
+        padding: 16px;
+    }
+
+    /* Chart */
+
+    #expenseChart {
+        max-width: 100%;
+    }
+
+}
+/* =================================
+   TOAST NOTIFICATION
+================================= */
+
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: #16a34a;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#toast.show.error {
+    background: #dc2626;
+}
+
+@media (max-width: 600px) {
+
+    #toast {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        text-align: center;
+    }
+
+}
+/* =================================
+   MOBILE APP BOTTOM NAVIGATION
+================================= */
+
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding-bottom: 85px;
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        height: 65px;
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 10000;
+        justify-content: space-around;
+        align-items: center;
+        padding: 6px;
+    }
+
+    .nav-item {
+        border: none;
+        background: transparent;
+        padding: 7px 10px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #6b7280;
+        min-width: 65px;
+    }
+
+    .nav-item span {
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .nav-item.active {
+        background: #111827;
+        color: white;
+    }
+
+}
+/* =================================
+   BOTTOM NAVIGATION FIX
+================================= */
+
+/* =========================================
+   PREMIUM FLOATING BOTTOM NAV
+========================================= */
+
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding-bottom: 105px !important;
+    }
+
+    .bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+
+        left: 14px !important;
+        right: 14px !important;
+        bottom: 12px !important;
+
+        height: 72px !important;
+
+        padding: 7px !important;
+
+        align-items: center !important;
+        justify-content: space-around !important;
+
+        background: rgba(255, 255, 255, 0.88) !important;
+        backdrop-filter: blur(18px) !important;
+        -webkit-backdrop-filter: blur(18px) !important;
+
+        border: 1px solid rgba(255, 255, 255, 0.75) !important;
+        border-radius: 24px !important;
+
+        box-shadow:
+            0 12px 35px rgba(0, 0, 0, 0.16),
+            0 4px 12px rgba(0, 0, 0, 0.08) !important;
+
+        z-index: 99999 !important;
+    }
+
+    .nav-item {
+        position: relative;
+
+        flex: 1;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 3px !important;
+
+        min-width: 0 !important;
+        height: 58px !important;
+
+        margin: 0 3px !important;
+
+        border: none !important;
+        outline: none !important;
+
+        background: transparent !important;
+
+        color: #6b7280 !important;
+
+        border-radius: 18px !important;
+
+        font-size: 21px !important;
+        font-weight: 600 !important;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease !important;
+    }
+
+    .nav-item span {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.1px;
+    }
+
+    /* Active item */
+
+    .nav-item.active {
+        background: #111827 !important;
+        color: #ffffff !important;
+
+        box-shadow:
+            0 6px 16px rgba(17, 24, 39, 0.22) !important;
+
+        transform: translateY(-2px);
+    }
+
+    /* Touch effect */
+
+    .nav-item:active {
+        transform: scale(0.93);
+    }
+
+    .nav-item:not(.active):hover {
+        background: #f3f4f6 !important;
+        color: #111827 !important;
+    }
+
+}
+
+
+/* =========================================
+   DARK MODE BOTTOM NAV
+========================================= */
+
+body.dark .bottom-nav {
+    background: rgba(31, 41, 55, 0.90) !important;
+
+    border-color: rgba(255, 255, 255, 0.08) !important;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.45),
+        0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark .nav-item {
+    color: #9ca3af !important;
+}
+
+body.dark .nav-item:not(.active):hover {
+    background: #374151 !important;
+    color: #ffffff !important;
+}
+
+body.dark .nav-item.active {
+    background: #f3f4f6 !important;
+    color: #111827 !important;
+}
+/* =========================================
+   DARK MODE FIX
+========================================= */
+
+body.dark {
+    background: #111827;
+    color: #f3f4f6;
+}
+
+/* Main cards */
+
+body.dark .balance-box,
+body.dark .summary,
+body.dark .dashboard,
+body.dark .transaction-form,
+body.dark .profile-box,
+body.dark .monthly-report,
+body.dark .budget-box,
+body.dark .history {
+    background: #1f2937;
+    color: #f3f4f6;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Headings and text */
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark p,
+body.dark strong,
+body.dark label,
+body.dark span {
+    color: inherit;
+}
+
+/* Profile */
+
+body.dark .profile-box {
+    color: #f3f4f6;
+}
+
+body.dark .profile-box p,
+body.dark .profile-box strong {
+    color: #f3f4f6;
+}
+
+body.dark #profileName,
+body.dark #profileEmail {
+    color: #f3f4f6;
+}
+
+/* Dashboard cards */
+
+body.dark .dashboard-card {
+    background: #111827;
+    color: #f3f4f6;
+}
+
+/* Income / Expense */
+
+body.dark .summary > div {
+    background: #111827;
+}
+
+body.dark .summary .income {
+    background: #123524;
+}
+
+body.dark .summary .expense {
+    background: #3b1f24;
+}
+
+/* Forms */
+
+body.dark input,
+body.dark select {
+    background: #1f2937;
+    color: #f3f4f6;
+    border-color: #4b5563;
+}
+
+body.dark input::placeholder {
+    color: #9ca3af;
+}
+
+/* Buttons */
+
+body.dark button {
+    color: #f3f4f6;
+}
+
+/* Transaction history */
+
+body.dark #list li {
+    background: #111827;
+    color: #f3f4f6;
+}
+
+body.dark #list li span,
+body.dark #list li b {
+    color: #f3f4f6;
+}
+
+/* Search + Filter */
+
+body.dark #search,
+body.dark #filter,
+body.dark #reportMonth,
+body.dark #budgetLimit {
+    background: #1f2937;
+    color: #f3f4f6;
+}
+
+/* Monthly report inner cards */
+
+body.dark .monthly-report > div {
+    color: #f3f4f6;
+}
+
+/* Progress bar */
+
+body.dark #progressBar {
+    background: #374151;
+}
+
+/* Bottom navigation */
+
+body.dark .bottom-nav {
+    background: #1f2937 !important;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.45) !important;
+}
+
+body.dark .nav-item {
+    color: #d1d5db !important;
+}
+
+body.dark .nav-item.active {
+    background: #f3f4f6 !important;
+    color: #111827 !important;
+}
+
+/* Change password */
+
+body.dark #oldPassword,
+body.dark #newPassword,
+body.dark #confirmNewPassword {
+    background: #1f2937;
+    color: #f3f4f6;
+}
+
+/* Toast */
+
+body.dark #toast {
+    color: white;
+}
+/* Security section spacing */
+
+.security-box {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 25px;
+}
+
+.security-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 12px;
+    background: #f3f4f6;
+    color: #1f2937;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.security-content {
+    padding: 12px 0 0;
+}
+
+/* Prevent fixed bottom nav from covering content */
+
+body {
+    padding-bottom: 105px;
+}
+/* =========================================
+   BOTTOM NAV SPACING FIX
+========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding-bottom: 90px !important;
+    }
+
+    .bottom-nav {
+        bottom: 12px !important;
+        height: 68px !important;
+    }
+
+    /* Keep important sections clear of the fixed nav */
+    .security-box {
+        margin-bottom: 35px !important;
+    }
+
+    #monthlyReport {
+        scroll-margin-top: 25px !important;
+        scroll-margin-bottom: 120px !important;
+    }
+}
+@media (max-width: 600px) {
+
+    .bottom-nav {
+        bottom: 8px !important;
+        height: 64px !important;
+    }
+
+    body {
+        padding-bottom: 90px !important;
+    }
+
+    .balance-box {
+        margin-top: 25px !important;
+    }
+
+    .security-box {
+        margin-bottom: 20px !important;
+    }
+
+    .bottom-nav + * {
+        margin-bottom: 0;
+    }
+}
+/* =========================================
+   DESKTOP WIDTH FIX
+========================================= */
+
+@media (min-width: 601px) {
+
+    .report-box,
+    .budget-box,
+    .transaction-form,
+    .history {
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #search,
+    #filter {
+        display: block;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+/* =========================================
+   FINAL DESKTOP CARD ALIGNMENT
+========================================= */
+
+@media (min-width: 601px) {
+
+    .profile-box,
+    .balance-box,
+    .summary,
+    .dashboard,
+    .report-box,
+    .budget-box,
+    .transaction-form,
+    .history,
+    #search,
+    #filter {
+        width: 100%;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .report-box {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    }
+
+}
